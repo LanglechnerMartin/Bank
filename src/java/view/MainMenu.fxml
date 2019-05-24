@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.ControllerMainMenu"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextArea fx:id="emailTextField" layoutX="177.0" layoutY="130.0" prefHeight="48.0" prefWidth="246.0" promptText="E-Mail">
+         <font>
+            <Font name="Serif Regular" size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+         <effect>
+            <Blend />
+         </effect>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets></TextArea>
+      <Button fx:id="loginButton" layoutX="268.0" layoutY="297.0" mnemonicParsing="false" onAction="#loginButton" text="Login" textOverrun="CLIP">
+         <font>
+            <Font name="Serif Regular" size="14.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+      </Button>
+      <PasswordField alignment="CENTER" layoutX="202.0" layoutY="228.0" promptText="Password">
+         <font>
+            <Font name="Serif Regular" size="14.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+      </PasswordField>
+   </children>
 </AnchorPane>
