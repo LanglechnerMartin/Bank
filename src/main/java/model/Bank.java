@@ -1,7 +1,6 @@
 package model;
 
 public class Bank{
-    private int balance;
 
     private static Bank dieBank = new Bank(0);
     private int balance;
