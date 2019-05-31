@@ -39,21 +39,49 @@ public class ControllerNavigation {
 
     @FXML
     public void home(){
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("Navigation.fxml"));
+            rootPane.getChildren().setAll(pane);
 
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     public void transfer(){
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("TransferPage.fxml"));
+            rootPane.getChildren().setAll(pane);
 
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     public void service(){
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("Service.fxml"));
+            rootPane.getChildren().setAll(pane);
 
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     public void settings(){
+        try {
+            AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("Settings.fxml"));
+            rootPane.getChildren().setAll(pane);
 
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,6 +1,7 @@
 package view;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,6 +15,12 @@ public class MainMenu extends Application {
         primaryStage.setTitle("WDG-Bank");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+    }
+
+    @FXML
+    public void changeScene(Stage primaryStage)throws Exception{
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Navigation.fxml"));
+        primaryStage.setScene(new Scene(root));
     }
 
 
