@@ -15,13 +15,11 @@ public class Database {
         connection = null;
     }
 
-    /* Klappt!
     public static void main(String[] args) {
         Database db = new Database();
         db.connect();
         db.closeConnection();
     }
-    */
 
     public void connect() {
         try {
@@ -42,6 +40,8 @@ public class Database {
             e.printStackTrace();
         }
     }
+
+
 
     public void executeSQL(String sqlBefehl) {
         try {
