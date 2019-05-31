@@ -1,12 +1,11 @@
 package controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ControllerTransfer {
+public class ControllerService {
 
     @FXML
     private URL location;
@@ -14,7 +13,7 @@ public class ControllerTransfer {
     @FXML
     private ResourceBundle resources;
 
-    public ControllerTransfer() { }
+    public ControllerService() { }
 
     @FXML
     public void initialize() { }
