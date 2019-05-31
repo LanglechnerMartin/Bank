@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.SQLException;
+import java.util.Date;
 
 
 public class Database {
@@ -41,6 +42,10 @@ public class Database {
         }
     }
 
+    public void addUser(String fn, String ln, String pw, String em, String st, char ge,
+                        int pc, int strn, String bd, Status stat){
+        //Todo: AddSchueler
+    }
 
 
     public void executeSQL(String sqlBefehl) {

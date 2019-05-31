@@ -4,14 +4,13 @@ import java.util.Date;
 
 public abstract class Account {
 
-    private String firstName, lastName, password, email, street;
+    private String firstName, lastName, password, email, street, birthdate;
     private char gender;
     private int postalCode, streetNumber;
-    private Date birthdate;
     private Status status;
 
     public Account(String fn, String ln, String pw, String em, String st, char ge,
-                int pc, int strn, Date bd, Status stat){
+                int pc, int strn, String bd, Status stat){
         firstName = fn;
         lastName = ln;
         password = pw;
@@ -88,11 +87,11 @@ public abstract class Account {
         this.streetNumber = streetNumber;
     }
 
-    public Date getBirthdate() {
+    public String getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
 
