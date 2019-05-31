@@ -18,4 +18,28 @@ public class ControllerNavigation {
     @FXML
     public void initialize() { }
 
+    @FXML
+    public void logout(){
+
+    }
+
+    @FXML
+    public void home(){
+
+    }
+
+    @FXML
+    public void transfer(){
+
+    }
+
+    @FXML
+    public void service(){
+
+    }
+
+    @FXML
+    public void settings(){
+
+    }
 }
