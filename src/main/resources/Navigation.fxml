@@ -12,7 +12,7 @@
 
 <AnchorPane fx:id="rootPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerNavigation">
    <children>
-      <Button fx:id="homeButton" alignment="CENTER" layoutX="53.0" layoutY="113.0" mnemonicParsing="false" onAction="#home" text="Home" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="640.0" AnchorPane.topAnchor="0.0">
+      <Button fx:id="homeButton" alignment="CENTER" focusTraversable="false" layoutX="53.0" layoutY="113.0" mnemonicParsing="false" onAction="#home" text="Home" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="640.0" AnchorPane.topAnchor="0.0">
          <effect>
             <Blend />
          </effect>
@@ -22,14 +22,14 @@
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button layoutX="83.0" layoutY="3.0" mnemonicParsing="false" onAction="#transfer" text="Transfer" textAlignment="CENTER" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="480.0" AnchorPane.topAnchor="0.0">
+      <Button focusTraversable="false" layoutX="83.0" layoutY="3.0" mnemonicParsing="false" onAction="#transfer" text="Transfer" textAlignment="CENTER" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="480.0" AnchorPane.topAnchor="0.0">
          <padding>
             <Insets bottom="10.0" right="10.0" top="10.0" />
          </padding>
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button alignment="CENTER" layoutX="445.0" layoutY="-1.0" mnemonicParsing="false" onAction="#logout" text="Logout" textAlignment="CENTER" AnchorPane.leftAnchor="640.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Button alignment="CENTER" focusTraversable="false" layoutX="445.0" layoutY="-1.0" mnemonicParsing="false" onAction="#logout" text="Logout" textAlignment="CENTER" AnchorPane.leftAnchor="640.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -37,25 +37,25 @@
             <Insets bottom="10.0" right="10.0" top="10.0" />
          </padding>
       </Button>
-      <Button layoutX="366.0" mnemonicParsing="false" onAction="#settings" text="Settings" textAlignment="CENTER" AnchorPane.leftAnchor="480.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="0.0">
+      <Button focusTraversable="false" layoutX="366.0" mnemonicParsing="false" onAction="#settings" text="Settings" textAlignment="CENTER" AnchorPane.leftAnchor="480.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="0.0">
          <padding>
             <Insets bottom="10.0" right="10.0" top="10.0" />
          </padding>
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button layoutX="268.0" mnemonicParsing="false" onAction="#service" text="Service" textAlignment="CENTER" AnchorPane.bottomAnchor="564.0" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="320.0">
+      <Button focusTraversable="false" layoutX="268.0" mnemonicParsing="false" onAction="#service" text="Service" textAlignment="CENTER" AnchorPane.bottomAnchor="564.0" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="320.0">
          <padding>
             <Insets bottom="10.0" right="10.0" top="10.0" />
          </padding>
          <font>
             <Font size="14.0" />
          </font></Button>
-      <ImageView fitHeight="337.0" fitWidth="353.0" layoutX="232.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="337.0" fitWidth="353.0" layoutX="263.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../Pictures/Camera%20Roll/WDGLogo.jpg" />
          </image></ImageView>
-      <TextField alignment="CENTER" layoutX="326.0" layoutY="499.0" text="Version 1.0 Beta">
+      <TextField alignment="CENTER" editable="false" layoutX="313.0" layoutY="499.0" text="Version 1.0 Beta">
          <font>
             <Font size="14.0" />
          </font>

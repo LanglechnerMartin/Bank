@@ -17,12 +17,6 @@ public class MainMenu extends Application {
         primaryStage.show();
     }
 
-    @FXML
-    public void changeScene(Stage primaryStage)throws Exception{
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("Navigation.fxml"));
-        primaryStage.setScene(new Scene(root));
-    }
-
 
     public static void main(String[] args) {
         launch(args);

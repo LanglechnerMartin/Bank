@@ -20,7 +20,7 @@ public class ControllerMainMenu {
     private TextArea emailTextArea;
 
     @FXML
-    private PasswordField loginPassword;
+    private PasswordField loginPasswordField;
 
     @FXML
     private URL location;
@@ -34,16 +34,21 @@ public class ControllerMainMenu {
     public void initialize() { }
 
     @FXML
-    public void loginButtonClicked() {
+    public void loginCheck() {
 
         String email = emailTextArea.getText();
-        String password = loginPassword.getText();
+        String password = loginPasswordField.getText();
         System.out.println("" + email + " " + password);
-        //todo: look for Password and Email in database
+        login();
+        //todo: Passwort mit Datenbank anbgleichen
+        // (Aus Datenbank holen, entschlüsseln, abgleichen und dementsprechend einloggen)
+        // Bei Falsch Dialog erscheinen lassen und warnen
+        // (Beispiel bei meinem Github Projekt unter den AddLehrer und AddSchueler Contollern)
+        // (Des Alert ist ein Dialog)
     }
 
     @FXML
-    public void loginButton(){
+    public void login(){
         try {
             AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("Navigation.fxml"));
             rootPane.getChildren().setAll(pane);

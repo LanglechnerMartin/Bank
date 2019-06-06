@@ -2,6 +2,7 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -15,6 +16,10 @@ public class ControllerSettings {
     private AnchorPane rootPane;
 
     @FXML
+    private TextField firstNameTextField, lastNameTextField, emailTextField, addressTextField,
+            oldPasswordTextField, newPasswordTextField, passwordAgainTextField;
+
+    @FXML
     private URL location;
 
     @FXML
@@ -23,7 +28,20 @@ public class ControllerSettings {
     public ControllerSettings() { }
 
     @FXML
-    public void initialize() { }
+    public void initialize() {
+        //Todo: First Name usw aus Datenbank holen und anzeigen lassen
+    }
+
+    //Todo: Überlegen, ob evt Email auch geändert werden darf
+
+    @FXML
+    private void changePassword(){
+        //Todo:
+        // 1. TextFields disable auf False setzen (Text darin löschen)
+        // --> Falls schon auf True Passwort eingabe prüfen, ob leer
+        // 2. Passwort abfragen und ändern
+        // 3. TextFields disable auf True setzen
+    }
 
     @FXML
     public void logout(){
