@@ -7,10 +7,10 @@ public abstract class Account {
     private String firstName, lastName, password, email, street, status;
     private Date birthdate;
     private char gender;
-    private int postalCode, streetNumber;
+    private int postalCode, streetNumber, id;
 
     public Account(String fn, String ln, String pw, String em, String st, char ge,
-                int pc, int strn, Date bd, String stat){
+                int pc, int strn, Date bd, String stat, int idN){
         firstName = fn;
         lastName = ln;
         password = pw;
@@ -21,6 +21,7 @@ public abstract class Account {
         gender = ge;
         birthdate = bd;
         status = stat;
+        id = idN;
     }
 
     public String getFirstName() {
@@ -101,5 +102,13 @@ public abstract class Account {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.*;
+import java.util.Random;
 
 
 public class Database {
@@ -30,16 +31,6 @@ public class Database {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        Database db = new Database();
-        db.connect();
-        db.addAccount("Julian", "Graßl", "Passwörter werden überbewertet",
-                "julian.grassl@wdgpocking.de", 94148, "Bgm-Osterholzer Straße", 7,
-                'm', Date.valueOf("2002-06-16"), "Admin", 1);
-        System.out.println(db.getUser("julian.grassl@wdgpocking.de").getFirstName());
-        db.closeConnection();
     }
 
     public void addAccount(String fn, String ln, String pw, String em, int pc, String st, int stN, char ge,
@@ -105,10 +96,10 @@ public class Database {
         }
     }
 
-    public void addLedger(int accountNumber, int userID, int pin, int balance){
+    public void addLedger(String accountNumber, int userID, int pin, int balance){
         try {
             executeSQL(
-                    "INSERT INTO Administrator VALUES (" + balance + ", '" +
+                    "INSERT INTO Ledger VALUES (" + balance + ", '" +
                             pin + "', '" +
                             accountNumber + "', '" +
                             userID + "')"
@@ -117,6 +108,28 @@ public class Database {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void changeBalance(int bl, String accNb) {
+        try {
+            executeSQL(String.format("UPDATE Ledger SET Balance = %d WHERE AccountNumber = '%s'", bl, accNb));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String generateAccountNumber() {
+        Random random = new Random();
+        String tmp3 = "00000000";
+        int tmp2 = random.nextInt(99);
+        int tmp4 = random.nextInt(999999);
+        return String.format("DE02%d%s%d", tmp2, tmp3, tmp4);
+    }
+
+    public int generatePIN() {
+        Random random = new Random();
+        return random.nextInt(9999);
     }
 
     public Account getUser(String email){
@@ -137,7 +150,8 @@ public class Database {
                 char ge = tmp[0];
                 Date bd = rs.getDate("Birthdate");
                 String stat = rs.getString("Status");
-                account = new User(fn, ln, pw, em, st, ge, pc, strn, bd, stat);
+                int id = rs.getInt("ID");
+                account = new User(fn, ln, pw, em, st, ge, pc, strn, bd, stat, id);
             }
             return account;
 
@@ -146,6 +160,46 @@ public class Database {
             return null;
         }
     }
+
+    public Ledger getLedger(String email){
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(
+                    "SELECT * " +
+                            "FROM Ledger AS l, Account AS a " +
+                            "WHERE a.Email = '" + email+ "'"
+            );
+            Ledger ledger = null;
+
+            while (rs.next()) {
+                int bl = rs.getInt("Balance");
+                int pin = rs.getInt("PIN");
+                String accNb = rs.getString("AccountNumber");
+                ledger = new Ledger(bl, pin, accNb);
+            }
+
+            return ledger;
+
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /*
+    public static void main(String[] args) {
+        Database db = new Database();
+        db.connect();
+        db.addAccount("Julian", "Graßl", "Passwörter werden überbewertet",
+                "julian.grassl@wdgpocking.de", 94148, "Bgm-Osterholzer Straße", 7,
+                'm', Date.valueOf("2002-06-16"), "Admin", 1);
+        System.out.println(db.getUser("julian.grassl@wdgpocking.de").getFirstName());
+        db.addLedger(db.generateAccountNumber(), db.getUser("julian.grassl@wdgpocking.de").getId(), db.generatePIN(), 0);
+        String accNb = db.getLedger("julian.grassl@wdgpocking.de").getAccountNumber();
+        db.changeBalance(1337, accNb);
+        db.closeConnection();
+    }
+    */
 
     public void executeSQL(String sqlBefehl) {
         try {
