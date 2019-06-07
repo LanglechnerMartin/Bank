@@ -26,7 +26,7 @@ public class Database {
         try {
             Class.forName("org.sqlite.JDBC");
 
-            connection = DriverManager.getConnection("jdbc:sqlite:Bank");
+            connection = DriverManager.getConnection("jdbc:sqlite:model/Bank.db");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -42,10 +42,42 @@ public class Database {
         }
     }
 
-    public void addUser(String fn, String ln, String pw, String em, String st, char ge,
-                        int pc, int strn, String bd, Status stat){
-        //Todo: AddSchueler
+    public void addAccount(String fn, String ln, String pw, String em, int pc, String st, int stN, char ge,
+                        String bd, Status stat, int id){
+        try {
+            executeSQL(
+                    "INSERT INTO Account VALUES (" + fn + ", '" +
+                            ln + "', '" +
+                            pw + "', '" +
+                            em + "', '" +
+                            pc + "', '" +
+                            st + "', '" +
+                            stN + "', '" +
+                            ge + "', '" +
+                            bd + "', '" +
+                            stat + "', '" +
+                            id +"')"
+            );
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
+
+    public void addUser(int userID, int accountID, int bankID){
+        try {
+            executeSQL(
+                    "INSERT INTO User VALUES (" + userID + ", '" +
+                            accountID + "', '" +
+                            bankID + "')"
+            );
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
     public void executeSQL(String sqlBefehl) {
