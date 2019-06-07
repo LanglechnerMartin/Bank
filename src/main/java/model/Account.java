@@ -1,24 +1,24 @@
 package model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public abstract class Account {
 
-    private String firstName, lastName, password, email, street, birthdate;
+    private String firstName, lastName, password, email, street, status;
+    private Date birthdate;
     private char gender;
     private int postalCode, streetNumber;
-    private Status status;
 
     public Account(String fn, String ln, String pw, String em, String st, char ge,
-                int pc, int strn, String bd, Status stat){
+                int pc, int strn, Date bd, String stat){
         firstName = fn;
         lastName = ln;
         password = pw;
         email = em;
-        street = st;
-        gender = ge;
         postalCode = pc;
+        street = st;
         streetNumber = strn;
+        gender = ge;
         birthdate = bd;
         status = stat;
     }
@@ -87,19 +87,19 @@ public abstract class Account {
         this.streetNumber = streetNumber;
     }
 
-    public String getBirthdate() {
+    public Date getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(String birthdate) {
+    public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 }
