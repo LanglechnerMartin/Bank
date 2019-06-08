@@ -41,6 +41,8 @@ public class ControllerSettings {
         // --> Falls schon auf True Passwort eingabe prüfen, ob leer
         // 2. Passwort abfragen und ändern
         // 3. TextFields disable auf True setzen
+        oldPasswordTextField.isVisible();
+        oldPasswordTextField.setVisible(true);
     }
 
     @FXML
