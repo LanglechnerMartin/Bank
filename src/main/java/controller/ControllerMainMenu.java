@@ -6,6 +6,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
+import model.Database;
+import model.User;
 import view.MainMenu;
 
 import java.io.IOException;
@@ -13,6 +15,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ControllerMainMenu {
+
+
+    public static String emailLogin;
+    private static String  passwordLogin;
+    private User user;
 
     @FXML
     private AnchorPane rootPane;
@@ -37,25 +44,39 @@ public class ControllerMainMenu {
     @FXML
     public void loginCheck() {
 
-        String email = emailTextArea.getText();
-        String password = loginPasswordField.getText();
-        System.out.println("" + email + " " + password);
+        try {
+            emailLogin = emailTextArea.getText();
+            passwordLogin = loginPasswordField.getText();
 
-        if(password.equals("Daniel")){ // Todo Passwort aus Datenbank holen (Aus Datenbank holen, entschlüsseln, abgleichen und dementsprechend einloggen)
-            login();
-        }
-        else{
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Bank-Login");
-            alert.setHeaderText("Login failed!");
-            alert.setContentText("Wrong Password or E-Mail! Please check your inputs!");
-            alert.showAndWait();
+            Database db = new Database();
+            db.connect();
+            user = db.getUser(emailLogin);
+            String passwordDatabase = user.getPassword();
+            db.closeConnection();
+
+            if(passwordLogin.equals(passwordDatabase)){
+                login();
+            }
+            else{
+                showDialog();
+            }
+
+        } catch (Exception e) {
+            showDialog();
         }
 
     }
 
+    private void showDialog() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Bank-Login");
+        alert.setHeaderText("Login failed!");
+        alert.setContentText("Wrong Password or E-Mail! Please check your inputs!");
+        alert.showAndWait();
+    }
+
     @FXML
-    public void login(){
+    private void login(){
         try {
             AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("Navigation.fxml"));
             rootPane.getChildren().setAll(pane);

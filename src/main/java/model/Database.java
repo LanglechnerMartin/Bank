@@ -33,8 +33,8 @@ public class Database {
         }
     }
 
-    public void addAccount(String fn, String ln, String pw, String em, int pc, String st, int stN, char ge,
-                        Date bd, String stat, int id){
+    public void addAccount(String fn, String ln, String pw, String em, int pc, String st, String stN, char ge,
+                        Date bd, String stat, int id) {
         try {
             executeSQL(
                     "INSERT INTO Account VALUES ('" + fn + "', '" +
@@ -56,6 +56,17 @@ public class Database {
 
     }
 
+    public void changePassword(String email, String newPw) {
+        try {
+            executeSQL(
+                    String.format("UPDATE Account SET Password = '%s' WHERE Email = '%s'", newPw, email)
+            );
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void addUser(int userID, int accountID){
         try {
             executeSQL(
@@ -69,7 +80,7 @@ public class Database {
         }
     }
 
-    public void addAdministrator(int adminID, int accountID){
+    public void addAdministrator(int adminID, int accountID) {
         try {
             executeSQL(
                     "INSERT INTO Administrator VALUES (" + accountID + ", '" +
@@ -96,7 +107,7 @@ public class Database {
         }
     }
 
-    public void addLedger(String accountNumber, int userID, int pin, int balance){
+    public void addLedger(String accountNumber, int userID, int pin, int balance) {
         try {
             executeSQL(
                     "INSERT INTO Ledger VALUES (" + balance + ", '" +
@@ -132,11 +143,11 @@ public class Database {
         return random.nextInt(9999);
     }
 
-    public Account getUser(String email){
+    public User getUser(String email) {
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM Account WHERE Email = '" + email + "'");
-            Account account = null;
+            User user = null;
 
             while (rs.next()) {
                 String fn = rs.getString("FirstName");
@@ -145,15 +156,15 @@ public class Database {
                 String em = rs.getString("Email");
                 int pc = rs.getInt("PostalCode");
                 String st = rs.getString("Street");
-                int strn = rs.getInt("StreetNumber");
+                String strn = rs.getString("StreetNumber");
                 char[] tmp = rs.getString("Gender").toCharArray();
                 char ge = tmp[0];
                 Date bd = rs.getDate("Birthdate");
                 String stat = rs.getString("Status");
                 int id = rs.getInt("ID");
-                account = new User(fn, ln, pw, em, st, ge, pc, strn, bd, stat, id);
+                user = new User(fn, ln, pw, em, st, ge, pc, strn, bd, stat, id);
             }
-            return account;
+            return user;
 
         } catch (Exception e){
             e.printStackTrace();
@@ -161,7 +172,7 @@ public class Database {
         }
     }
 
-    public Ledger getLedger(String email){
+    public Ledger getLedger(String email) {
         try {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(
@@ -201,7 +212,7 @@ public class Database {
     }
     */
 
-    public void executeSQL(String sqlBefehl) {
+    private void executeSQL(String sqlBefehl) {
         try {
             Statement statement = connection.createStatement();
             statement.executeUpdate(sqlBefehl);

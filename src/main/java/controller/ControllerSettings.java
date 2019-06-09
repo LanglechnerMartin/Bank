@@ -2,8 +2,12 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import model.Database;
+import model.User;
 
 import java.io.IOException;
 import java.net.URL;
@@ -12,12 +16,19 @@ import java.util.ResourceBundle;
 
 public class ControllerSettings {
 
+    private User user;
+    private Database db;
+    private String email;
+
     @FXML
     private AnchorPane rootPane;
 
     @FXML
-    private TextField firstNameTextField, lastNameTextField, emailTextField, addressTextField,
+    private TextField firstNameTextField, lastNameTextField, emailTextField,
             oldPasswordTextField, newPasswordTextField, passwordAgainTextField;
+
+    @FXML
+    private TextArea addressTextField;
 
     @FXML
     private URL location;
@@ -29,20 +40,57 @@ public class ControllerSettings {
 
     @FXML
     public void initialize() {
-        //Todo: First Name usw aus Datenbank holen und anzeigen lassen
+        try {
+            email = ControllerMainMenu.emailLogin;
+            db = new Database();
+            db.connect();
+            user = db.getUser(email);
+            db.closeConnection();
+
+            firstNameTextField.setText(user.getFirstName());
+            lastNameTextField.setText(user.getLastName());
+            emailTextField.setText(user.getEmail());
+            addressTextField.setText(user.getPostalCode() + "\n" + user.getStreet() + " " + user.getStreetNumber());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     //Todo: Überlegen, ob evt Email auch geändert werden darf
 
     @FXML
-    private void changePassword(){
-        //Todo:
-        // 1. TextFields disable auf False setzen (Text darin löschen)
-        // --> Falls schon auf True Passwort eingabe prüfen, ob leer
-        // 2. Passwort abfragen und ändern
-        // 3. TextFields disable auf True setzen
-        oldPasswordTextField.isVisible();
-        oldPasswordTextField.setVisible(true);
+    private void changePassword() {
+        try {
+            if (oldPasswordTextField.isDisabled()) {
+                oldPasswordTextField.setDisable(false);
+                newPasswordTextField.setDisable(false);
+                passwordAgainTextField.setDisable(false);
+
+            } else {
+                if (!oldPasswordTextField.getText().equals(user.getPassword())) {
+                    showDialog();
+
+                } else {
+                    db.connect();
+                    db.changePassword(email, newPasswordTextField.getText());
+                    db.closeConnection();
+
+                    settings();
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showDialog() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Bank-Login");
+        alert.setHeaderText("Login failed!");
+        alert.setContentText("Wrong Password or E-Mail! Please check your inputs!");
+        alert.showAndWait();
     }
 
     @FXML

@@ -4,13 +4,13 @@ import java.sql.Date;
 
 public abstract class Account {
 
-    private String firstName, lastName, password, email, street, status;
+    private String firstName, lastName, password, email, street, status, streetNumber;
     private Date birthdate;
     private char gender;
-    private int postalCode, streetNumber, id;
+    private int postalCode, id;
 
     public Account(String fn, String ln, String pw, String em, String st, char ge,
-                int pc, int strn, Date bd, String stat, int idN){
+                   int pc, String strn, Date bd, String stat, int idN){
         firstName = fn;
         lastName = ln;
         password = pw;
@@ -80,11 +80,11 @@ public abstract class Account {
         this.postalCode = postalCode;
     }
 
-    public int getStreetNumber() {
+    public String getStreetNumber() {
         return streetNumber;
     }
 
-    public void setStreetNumber(int streetNumber) {
+    public void setStreetNumber(String streetNumber) {
         this.streetNumber = streetNumber;
     }
 
