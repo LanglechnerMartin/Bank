@@ -2,9 +2,7 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import model.Database;
 import model.User;
@@ -24,6 +22,9 @@ public class ControllerSettings {
     private AnchorPane rootPane;
 
     @FXML
+    private TitledPane addUserTitledPane, deleteUserTitledPane;
+
+    @FXML
     private TextField firstNameTextField, lastNameTextField, emailTextField,
             oldPasswordTextField, newPasswordTextField, passwordAgainTextField;
 
@@ -41,11 +42,7 @@ public class ControllerSettings {
     @FXML
     public void initialize() {
         try {
-            email = ControllerMainMenu.emailLogin;
-            db = new Database();
-            db.connect();
-            user = db.getUser(email);
-            db.closeConnection();
+            user = ControllerMainMenu.user;
 
             firstNameTextField.setText(user.getFirstName());
             lastNameTextField.setText(user.getLastName());
@@ -83,6 +80,16 @@ public class ControllerSettings {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void deleteUser() {
+        deleteUserTitledPane.setVisible(true);
+    }
+
+    @FXML
+    private void addUser() {
+        addUserTitledPane.setVisible(true);
     }
 
     private void showDialog() {
@@ -144,9 +151,16 @@ public class ControllerSettings {
     @FXML
     public void settings(){
         try {
-            AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("Settings.fxml"));
-            rootPane.getChildren().setAll(pane);
+            User user = ControllerMainMenu.user;
+            if (user.getStatus().equals("Admin")) {
+                AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("SettingsAdmin.fxml"));
+                rootPane.getChildren().setAll(pane);
 
+            } else {
+                AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("Settings.fxml"));
+                rootPane.getChildren().setAll(pane);
+
+            }
         }
         catch (IOException e) {
             e.printStackTrace();

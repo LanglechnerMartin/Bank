@@ -19,7 +19,7 @@ public class ControllerMainMenu {
 
     public static String emailLogin;
     private static String  passwordLogin;
-    private User user;
+    public static User user;
 
     @FXML
     private AnchorPane rootPane;

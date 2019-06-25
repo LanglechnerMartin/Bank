@@ -3,6 +3,7 @@ package controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
+import model.User;
 
 import java.io.IOException;
 import java.net.URL;
@@ -76,9 +77,16 @@ public class ControllerService {
     @FXML
     public void settings(){
         try {
-            AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("Settings.fxml"));
-            rootPane.getChildren().setAll(pane);
+            User user = ControllerMainMenu.user;
+            if (user.getStatus().equals("Admin")) {
+                AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("SettingsAdmin.fxml"));
+                rootPane.getChildren().setAll(pane);
 
+            } else {
+                AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("Settings.fxml"));
+                rootPane.getChildren().setAll(pane);
+
+            }
         }
         catch (IOException e) {
             e.printStackTrace();
