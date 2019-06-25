@@ -1,5 +1,8 @@
 package model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.*;
 import java.util.Random;
 
@@ -130,6 +133,15 @@ public class Database {
         }
     }
 
+    public void deleteUser(String email) {
+        try {
+            executeSQL("DELETE FROM Account WHERE Email = '" + email + "'");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public String generateAccountNumber() {
         Random random = new Random();
         String tmp3 = "00000000";
@@ -170,6 +182,31 @@ public class Database {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public ObservableList<String> getAccount(String whereSearch) {
+        try {
+            Statement stat = connection.createStatement();
+
+            String sql = whereSearch;
+            ResultSet rs = stat.executeQuery(sql);
+            ObservableList data = FXCollections.observableArrayList();
+
+            while (rs.next()) {
+                //Iterate Row
+                ObservableList<String> row = FXCollections.observableArrayList();
+                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                    //Iterate Column
+                    row.add(rs.getString(i));
+                }
+                data.add(row);
+            }
+            return data;
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public Ledger getLedger(String email) {
@@ -220,5 +257,9 @@ public class Database {
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public Connection getConnection() {
+        return connection;
     }
 }
