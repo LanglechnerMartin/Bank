@@ -33,7 +33,9 @@ public class ControllerSettings {
     @FXML
     private TextField firstNameTextField, lastNameTextField, emailTextField,
             oldPasswordTextField, newPasswordTextField, passwordAgainTextField,
-            idField, emailField, fnField, lnField, deleteEmail;
+            idField, emailField, fnField, lnField, deleteEmail, addUserFN, addUserLN,
+            addUserPW, addUserEmail, addUserBD, addUserPC, addUserStreet, addUserSN,
+            addUserGender, addUserStatus;
 
     @FXML
     private TextArea addressTextField;
@@ -202,7 +204,20 @@ public class ControllerSettings {
 
     @FXML
     public void submit() {
-        //Todo: JUST DO IT || Kappa
+        try {
+            db.connect();
+
+            db.addAccount( addUserFN.getText(), addUserLN.getText(), addUserPW.getText(), addUserEmail.getText(),
+                    addUserBD.getText(), addUserPC.getText(), addUserStreet.getText(), addUserSN.getText()),
+                    addUserGender.getText(), addUserStatus.getText());
+
+            db.closeConnection();
+        }
+
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     @FXML
