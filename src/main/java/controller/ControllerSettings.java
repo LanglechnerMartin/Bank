@@ -68,8 +68,6 @@ public class ControllerSettings {
         }
     }
 
-    //Todo: Überlegen, ob evt Email auch geändert werden darf
-
     @FXML
     private void changePassword() {
         try {
