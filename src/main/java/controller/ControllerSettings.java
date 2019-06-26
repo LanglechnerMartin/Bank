@@ -156,15 +156,15 @@ public class ControllerSettings {
             tmp = " AND ";
         }
         if (!vorname.equals("")) {
-            query += tmp + "Vorname = '" + vorname + "'";
+            query += tmp + "FirstName = '" + vorname + "'";
             tmp = " AND ";
         }
         if (!nachname.equals("")) {
-            query += tmp + "Nachname = '" + nachname + "'";
+            query += tmp + "LastName = '" + nachname + "'";
             tmp = " AND ";
         }
         if (!email.equals("")) {
-            query += tmp + "Klasse = '" + email + "'";
+            query += tmp + "Email = '" + email + "'";
             tmp = " AND ";
         }
         if (id.equals("") && email.equals("") && vorname.equals("") && nachname.equals("")) {
