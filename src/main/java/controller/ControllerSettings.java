@@ -206,8 +206,8 @@ public class ControllerSettings {
             db.connect();
 
             db.addAccount( addUserFN.getText(), addUserLN.getText(), addUserPW.getText(), addUserEmail.getText(),
-                    addUserBD.getText(), addUserPC.getText(), addUserStreet.getText(), addUserSN.getText()),
-                    addUserGender.getText(), addUserStatus.getText());
+                    Integer.parseInt(addUserPC.getText()), addUserStreet.getText(), Integer.parseInt(addUserSN.getText()),
+                    addUserGender.getText(),addUserBD.getText(), addUserStatus.getText());
 
             db.closeConnection();
         }
