@@ -103,7 +103,7 @@
                   <TextField fx:id="addUserGender" layoutX="301.0" layoutY="172.0" prefHeight="25.0" prefWidth="149.0" promptText="Gender" />
                   <TextField fx:id="addUserBD" layoutX="62.0" layoutY="253.0" prefHeight="25.0" prefWidth="149.0" promptText="Year of Birth" />
                   <TextField fx:id="addUserStatus" layoutX="301.0" layoutY="214.0" prefHeight="25.0" prefWidth="149.0" promptText="Status" />
-                  <TextField fx:id="addUserStatus1" layoutX="301.0" layoutY="253.0" onAction="#addUserID" prefHeight="25.0" prefWidth="149.0" promptText="ID" />
+                  <TextField fx:id="addUserID" layoutX="301.0" layoutY="253.0" prefHeight="25.0" prefWidth="149.0" promptText="ID" />
                   <Label layoutX="62.0" layoutY="26.0" prefHeight="31.0" prefWidth="118.0" text="Add User">
                      <font>
                         <Font size="22.0" />

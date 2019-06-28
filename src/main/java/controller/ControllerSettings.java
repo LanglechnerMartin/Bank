@@ -36,7 +36,7 @@ public class ControllerSettings {
             oldPasswordTextField, newPasswordTextField, passwordAgainTextField,
             idField, emailField, fnField, lnField, deleteEmail, addUserFN, addUserLN,
             addUserPW, addUserEmail, addUserBD, addUserPC, addUserStreet, addUserSN,
-            addUserGender, addUserStatus;
+            addUserGender, addUserStatus, addUserID;
 
     @FXML
     private TextArea addressTextField;
@@ -210,7 +210,7 @@ public class ControllerSettings {
 
             db.addAccount(addUserFN.getText(), addUserLN.getText(), addUserPW.getText(), addUserEmail.getText(),
                     Integer.parseInt(addUserPC.getText()), addUserStreet.getText(), addUserSN.getText(),
-                    addUserGender.getText().charAt(0), date, addUserStatus.getText(), 1);
+                    addUserGender.getText().charAt(0), date, addUserStatus.getText(), Integer.parseInt(addUserID.getText()));
 
             db.closeConnection();
         }
