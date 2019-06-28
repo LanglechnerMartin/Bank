@@ -13,6 +13,7 @@ import model.User;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
@@ -205,9 +206,11 @@ public class ControllerSettings {
         try {
             db.connect();
 
-            db.addAccount( addUserFN.getText(), addUserLN.getText(), addUserPW.getText(), addUserEmail.getText(),
-                    Integer.parseInt(addUserPC.getText()), addUserStreet.getText(), Integer.parseInt(addUserSN.getText()),
-                    addUserGender.getText(),addUserBD.getText(), addUserStatus.getText());
+            Date date = new Date(Integer.parseInt(addUserBD.getText()));
+
+            db.addAccount(addUserFN.getText(), addUserLN.getText(), addUserPW.getText(), addUserEmail.getText(),
+                    Integer.parseInt(addUserPC.getText()), addUserStreet.getText(), addUserSN.getText(),
+                    addUserGender.getText().charAt(0), date, addUserStatus.getText(), 1);
 
             db.closeConnection();
         }
