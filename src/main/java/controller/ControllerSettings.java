@@ -213,6 +213,8 @@ public class ControllerSettings {
                     addUserGender.getText().charAt(0), date, addUserStatus.getText(), Integer.parseInt(addUserID.getText()));
 
             db.closeConnection();
+
+            settings();
         }
 
         catch(Exception e){
