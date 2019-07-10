@@ -49,6 +49,6 @@
                 <Font size="14.0" />
             </font></Button>
       <Button layoutX="98.0" layoutY="120.0" mnemonicParsing="false" onAction="#directTransfer" prefHeight="40.0" prefWidth="124.0" text="Direct transfer" />
-      <TableView layoutX="87.0" layoutY="204.0" prefHeight="376.0" prefWidth="660.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0" />
+      <TableView fx:id="tableView" layoutX="87.0" layoutY="204.0" prefHeight="376.0" prefWidth="660.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0" />
     </children>
 </AnchorPane>

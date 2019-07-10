@@ -71,21 +71,26 @@ public class ControllerSettings {
         }
     }
 
+    //Caeser
     @FXML
     private void changePassword() {
         try {
+            Caesar cs = new Caesar();
+
             if (oldPasswordTextField.isDisabled()) {
                 oldPasswordTextField.setDisable(false);
                 newPasswordTextField.setDisable(false);
                 passwordAgainTextField.setDisable(false);
 
             } else {
-                if (!oldPasswordTextField.getText().equals(user.getPassword())) {
+                if (!oldPasswordTextField.getText().equals(cs.decrypt(user.getPassword()))) {
                     showDialog();
 
                 } else {
                     db.connect();
-                    db.changePassword(email, newPasswordTextField.getText());
+                    if (newPasswordTextField.getText().equals(passwordAgainTextField.getText())){
+                        db.changePassword(email, cs.encrypt(newPasswordTextField.getText()));
+                    }
                     db.closeConnection();
 
                     settings();

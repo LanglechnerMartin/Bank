@@ -41,6 +41,7 @@ public class ControllerTransfer {
     @FXML
     public void initialize() {
         setupTable();
+        search();
     }
 
     @FXML
@@ -80,45 +81,26 @@ public class ControllerTransfer {
         }
     }
 
-    /*
     @FXML
-    private void search(){
-        String id = idField.getText();
-        String vorname = fnField.getText();
-        String nachname = lnField.getText();
-        String email = emailField.getText();
+    private void search() {
+        try {
+            Database db = new Database();
+            user = ControllerMainMenu.user;
+            int id = user.getId();
 
-        String query = "SELECT ID, FirstName, LastName, Email, Birthdate, Status FROM Account WHERE ";
-        String tmp = "";
+            String query = String.format("SELECT * FROM History WHERE ToUser = '%d' OR FromUser = '%d';", id, id);
 
-        if (!id.equals("")) {
-            query += tmp + "ID = '" + id + "'";
-            tmp = " AND ";
-        }
-        if (!vorname.equals("")) {
-            query += tmp + "FirstName = '" + vorname + "'";
-            tmp = " AND ";
-        }
-        if (!nachname.equals("")) {
-            query += tmp + "LastName = '" + nachname + "'";
-            tmp = " AND ";
-        }
-        if (!email.equals("")) {
-            query += tmp + "Email = '" + email + "'";
-            tmp = " AND ";
-        }
-        if (id.equals("") && email.equals("") && vorname.equals("") && nachname.equals("")) {
-            query = "SELECT ID, FirstName, LastName, Email, Birthdate, Status FROM Account";
-        }
+            db.connect();
+            ObservableList data = db.getHistory(query);
+            tableView.getItems().clear();
+            tableView.setItems(data);
+            db.closeConnection();
 
-        db.connect();
-        ObservableList data = db.getAccount(query);
-        tableView.getItems().clear();
-        tableView.setItems(data);
-        db.closeConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
-     */
 
     @FXML
     public void logout(){

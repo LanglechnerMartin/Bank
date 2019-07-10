@@ -20,7 +20,7 @@ public class Database {
         try {
             Class.forName("org.sqlite.JDBC");
 
-            connection = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\WDGS\\IdeaProjects\\Bank\\src\\main\\java\\model\\Bank.db");
+            connection = DriverManager.getConnection("jdbc:sqlite:F:\\MULL3\\src\\main\\java\\model\\Bank.db");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -234,6 +234,31 @@ public class Database {
         }
     }
 
+    public ObservableList<String> getHistory(String whereSearch) {
+        try {
+            Statement stat = connection.createStatement();
+
+            String sql = whereSearch;
+            ResultSet rs = stat.executeQuery(sql);
+            ObservableList data = FXCollections.observableArrayList();
+
+            while (rs.next()) {
+                //Iterate Row
+                ObservableList<String> row = FXCollections.observableArrayList();
+                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                    //Iterate Column
+                    row.add(rs.getString(i));
+                }
+                data.add(row);
+            }
+            return data;
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     /*
     public static void main(String[] args) {
         Database db = new Database();
@@ -258,6 +283,38 @@ public class Database {
             e.printStackTrace();
         }
     }
+
+    /*
+    public static void main(String[] args) {
+        Database db = new Database();
+        db.connect();
+        db.test();
+        db.closeConnection();
+    }
+
+    public void test() {
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(
+                    "SELECT * FROM History"
+            );
+
+            while (rs.next()) {
+                int i = rs.getInt("FromUser");
+                int a = rs.getInt("ToUser");
+                int b = rs.getInt("Amount");
+                int t = rs.getInt("TransferNumber");
+
+                String g = String.format("%d %d %d %d", i, a, b, t);
+                System.out.println(g);
+            }
+
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+     */
 
     public Connection getConnection() {
         return connection;
