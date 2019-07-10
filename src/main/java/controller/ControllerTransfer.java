@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 
@@ -46,7 +47,26 @@ public class ControllerTransfer {
 
     @FXML
     private void directTransfer() {
-        //Todo: XY
+        try {
+            Database db = new Database();
+            db.connect();
+
+            int toUser = AccountNumber.getText();
+            int fromUser = user.getId();
+
+            db.addHistory(generateTransferNumber(), fromUser, toUser, amount);
+
+            db.closeConnection();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int generateTransferNumber() {
+        Random random = new Random();
+        int tmp = random.nextInt(999999);
+        return tmp;
     }
 
     private void setupTable(){
@@ -99,7 +119,6 @@ public class ControllerTransfer {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @FXML
