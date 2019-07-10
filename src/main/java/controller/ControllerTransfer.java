@@ -56,16 +56,18 @@ public class ControllerTransfer {
             Database db = new Database();
             db.connect();
 
-            int toUser = Integer.parseInt(accountNumberTF.getText());
+            int tmp = Integer.parseInt(accountNumberTF.getText());
+            User toUser = db.getUser(tmp);
             int fromUser = user.getId();
             int money = Integer.parseInt(amount.getText());
 
-            db.addHistory(generateTransferNumber(), fromUser, toUser, money);
+            db.addHistory(generateTransferNumber(), fromUser, toUser.getId(), money);
 
-            Ledger ledger = db.getLedger(user.getEmail());
+            Ledger ledgerFROM = db.getLedger(user.getEmail());
+            db.changeBalance(ledgerFROM.getBalance() - money, fromUser);
 
-            db.changeBalance(ledger.getBalance() - money, fromUser);
-            db.changeBalance(, toUser);
+            Ledger ledgerTO = db.getLedger(toUser.getEmail());
+            db.changeBalance(ledgerTO.getBalance() + money, toUser.getId());
 
             db.closeConnection();
 

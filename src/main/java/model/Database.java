@@ -175,6 +175,35 @@ public class Database {
         }
     }
 
+    public User getUser(int accountNumber) {
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM Account as a, Ledger as l WHERE l.acc = '" + accountNumber + "'");
+            User user = null;
+
+            while (rs.next()) {
+                String fn = rs.getString("FirstName");
+                String ln = rs.getString("LastName");
+                String pw = rs.getString("Password");
+                String em = rs.getString("Email");
+                int pc = rs.getInt("PostalCode");
+                String st = rs.getString("Street");
+                String strn = rs.getString("StreetNumber");
+                char[] tmp = rs.getString("Gender").toCharArray();
+                char ge = tmp[0];
+                Date bd = rs.getDate("Birthdate");
+                String stat = rs.getString("Status");
+                int id = rs.getInt("ID");
+                user = new User(fn, ln, pw, em, st, ge, pc, strn, bd, stat, id);
+            }
+            return user;
+
+        } catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public ObservableList<String> getAccount(String whereSearch) {
         try {
             Statement stat = connection.createStatement();
