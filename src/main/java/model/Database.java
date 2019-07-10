@@ -6,6 +6,9 @@ import javafx.collections.ObservableList;
 import java.sql.*;
 import java.util.Random;
 
+/*
+ GESAMTE DATENBANK VON >JULIAN<
+ */
 
 public class Database {
 

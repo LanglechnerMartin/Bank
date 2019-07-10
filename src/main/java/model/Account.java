@@ -2,6 +2,10 @@ package model;
 
 import java.sql.Date;
 
+/*
+ GESAMTE DATENBANK VON >JULIAN<
+ */
+
 public abstract class Account {
 
     private String firstName, lastName, password, email, street, status, streetNumber;

@@ -9,6 +9,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<!-- MENÜBAND VON MARTIN | CHANGE PASSWORD UND NUTZERNANZEIGE VON JULIAN | ADDUSER VON MARTIN | DELETE USER VON JULIAN -->
+
 <AnchorPane fx:id="rootPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerSettings">
    <children>
       <Button alignment="CENTER" focusTraversable="false" layoutX="53.0" layoutY="113.0" mnemonicParsing="false" onAction="#home" text="Home" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="640.0" AnchorPane.topAnchor="0.0">

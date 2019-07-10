@@ -23,6 +23,7 @@ public class ControllerMainMenu {
     public static User user;
     private Caesar cs;
 
+
     @FXML
     private AnchorPane rootPane;
 

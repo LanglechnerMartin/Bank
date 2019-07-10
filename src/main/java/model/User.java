@@ -3,6 +3,10 @@ package model;
 import java.sql.Date;
 import java.util.Random;
 
+/*
+ GESAMTE DATENBANK VON >JULIAN<
+ */
+
 public class User extends Account{
 
     public User(String fn, String ln, String pw, String em, String st, char ge,

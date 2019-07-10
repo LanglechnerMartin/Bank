@@ -1,5 +1,9 @@
 package model;
 
+/*
+ GESAMTE DATENBANK VON >JULIAN<
+ */
+
 public class Ledger {
     private int balance, PIN;
     private String accountNumber;

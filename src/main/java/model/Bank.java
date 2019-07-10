@@ -1,5 +1,9 @@
 package model;
 
+/*
+ GESAMTE DATENBANK VON >JULIAN<
+ */
+
 public class Bank{
 
     private static Bank dieBank = new Bank(0);
