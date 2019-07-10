@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
+import model.Caesar;
 import model.Database;
 import model.User;
 
@@ -24,6 +25,7 @@ public class ControllerSettings {
     private User user;
     private Database db;
     private String email;
+    private Caesar cs;
 
     @FXML
     private AnchorPane rootPane;
@@ -208,7 +210,7 @@ public class ControllerSettings {
 
             Date date = new Date(Integer.parseInt(addUserBD.getText()));
 
-            db.addAccount(addUserFN.getText(), addUserLN.getText(), addUserPW.getText(), addUserEmail.getText(),
+            db.addAccount(addUserFN.getText(), addUserLN.getText(), cs.encrypt(addUserPW.getText()), addUserEmail.getText(),
                     Integer.parseInt(addUserPC.getText()), addUserStreet.getText(), addUserSN.getText(),
                     addUserGender.getText().charAt(0), date, addUserStatus.getText(), Integer.parseInt(addUserID.getText()));
 

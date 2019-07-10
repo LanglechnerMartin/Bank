@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
+import model.Caesar;
 import model.Database;
 import model.User;
 import view.MainMenu;
@@ -20,6 +21,7 @@ public class ControllerMainMenu {
     public static String emailLogin;
     private static String  passwordLogin;
     public static User user;
+    private Caesar cs;
 
     @FXML
     private AnchorPane rootPane;
@@ -40,7 +42,7 @@ public class ControllerMainMenu {
 
     @FXML
     public void initialize() { }
-
+//Caesar encrypt + decrypt
     @FXML
     public void loginCheck() {
 
@@ -51,10 +53,10 @@ public class ControllerMainMenu {
             Database db = new Database();
             db.connect();
             user = db.getUser(emailLogin);
-            String passwordDatabase = user.getPassword();
+            String passwordDatabase = cs.encrypt(user.getPassword());
             db.closeConnection();
 
-            if(passwordLogin.equals(passwordDatabase)){
+            if(passwordLogin.equals(cs.decrypt(passwordDatabase))){
                 login();
             }
             else{
