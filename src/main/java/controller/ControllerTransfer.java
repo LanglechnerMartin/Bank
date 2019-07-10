@@ -9,6 +9,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import model.Database;
@@ -37,6 +38,9 @@ public class ControllerTransfer {
     private TableView tableView;
 
     @FXML
+    private TitledPane directTransferTitledPane;
+
+    @FXML
     private URL location;
 
     @FXML
@@ -48,6 +52,11 @@ public class ControllerTransfer {
     public void initialize() {
         setupTable();
         search();
+    }
+
+    @FXML
+    public void directTransferButton(){
+        directTransferTitledPane.setVisible(true);
     }
 
     @FXML
