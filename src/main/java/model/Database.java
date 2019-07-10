@@ -53,6 +53,7 @@ public class Database {
                             id +"')"
             );
 
+            addLedger(generateAccountNumber(), id, generatePIN(), 0); // da Kseno mit dem Ledger
         } catch (Exception e){
             e.printStackTrace();
         }
