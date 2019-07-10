@@ -115,9 +115,9 @@ public class Database {
         }
     }
 
-    public void changeBalance(int bl, String accNb) {
+    public void changeBalance(int bl, int accNb) {
         try {
-            executeSQL(String.format("UPDATE Ledger SET Balance = %d WHERE AccountNumber = '%s'", bl, accNb));
+            executeSQL(String.format("UPDATE Ledger SET Balance = %d WHERE AccountNumber = '%d'", bl, accNb));
 
         } catch (Exception e) {
             e.printStackTrace();

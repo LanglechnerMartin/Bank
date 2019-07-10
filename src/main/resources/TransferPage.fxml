@@ -56,7 +56,7 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="accoutNumberTF" layoutX="269.0" layoutY="47.0" />
+                  <TextField fx:id="accountNumberTF" layoutX="269.0" layoutY="47.0" />
                   <TextField fx:id="amoutTF" layoutX="269.0" layoutY="157.0" />
                   <Button layoutX="330.0" layoutY="265.0" mnemonicParsing="false" onAction="#directTransfer" text="Button" />
                </children>

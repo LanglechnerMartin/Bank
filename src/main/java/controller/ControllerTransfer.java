@@ -8,9 +8,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import model.Database;
+import model.Ledger;
 import model.User;
 
 import java.io.IOException;
@@ -24,6 +26,9 @@ import java.util.ResourceBundle;
 public class ControllerTransfer {
 
     private User user; //user = ControllerMainMenu.user;
+
+    @FXML
+    private TextField accountNumberTF, amount;
 
     @FXML
     private AnchorPane rootPane;
@@ -51,10 +56,16 @@ public class ControllerTransfer {
             Database db = new Database();
             db.connect();
 
-            int toUser = AccountNumber.getText();
+            int toUser = Integer.parseInt(accountNumberTF.getText());
             int fromUser = user.getId();
+            int money = Integer.parseInt(amount.getText());
 
-            db.addHistory(generateTransferNumber(), fromUser, toUser, amount);
+            db.addHistory(generateTransferNumber(), fromUser, toUser, money);
+
+            Ledger ledger = db.getLedger(user.getEmail());
+
+            db.changeBalance(ledger.getBalance() - money, fromUser);
+            db.changeBalance(, toUser);
 
             db.closeConnection();
 
