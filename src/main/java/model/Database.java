@@ -74,19 +74,6 @@ public class Database {
         }
     }
 
-    public void addUser(int userID, int accountID){
-        try {
-            executeSQL(
-                    "INSERT INTO User VALUES (" + accountID + ", '" +
-                            userID + "', '" +
-                            bankID + "')"
-            );
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public void addAdministrator(int adminID, int accountID) {
         try {
             executeSQL(
