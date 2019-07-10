@@ -53,7 +53,7 @@
          </font></Button>
       <ImageView fitHeight="337.0" fitWidth="353.0" layoutX="263.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../Pictures/Camera%20Roll/WDGLogo.jpg" />
+            <Image url="@WDGLogo.jpg" />
          </image></ImageView>
       <TextField alignment="CENTER" editable="false" layoutX="313.0" layoutY="499.0" text="Version 1.0 Beta">
          <font>
