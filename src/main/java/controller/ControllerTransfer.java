@@ -29,7 +29,7 @@ public class ControllerTransfer {
     private User user; //user = ControllerMainMenu.user;
 
     @FXML
-    private TextField accountNumberTF, amount;
+    private TextField accountNumberTF, amountTF;
 
     @FXML
     private AnchorPane rootPane;
@@ -68,7 +68,7 @@ public class ControllerTransfer {
             int tmp = Integer.parseInt(accountNumberTF.getText());
             User toUser = db.getUser(tmp);
             int fromUser = user.getId();
-            int money = Integer.parseInt(amount.getText());
+            int money = Integer.parseInt(amountTF.getText());
 
             db.addHistory(generateTransferNumber(), fromUser, toUser.getId(), money);
 

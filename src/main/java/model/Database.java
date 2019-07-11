@@ -178,7 +178,7 @@ public class Database {
     public User getUser(int accountNumber) {
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Account as a, Ledger as l WHERE l.acc = '" + accountNumber + "'");
+            ResultSet rs = statement.executeQuery("SELECT * FROM Account a, Ledger l WHERE l.AccountNumber = '" + accountNumber + "'");
             User user = null;
 
             while (rs.next()) {
