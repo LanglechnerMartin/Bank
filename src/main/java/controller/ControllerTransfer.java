@@ -60,6 +60,9 @@ public class ControllerTransfer {
     }
 
     @FXML
+    public void transferBack(){ directTransferTitledPane.setVisible(false);}
+
+    @FXML
     private void directTransfer() {
         try {
             Database db = new Database();
