@@ -58,14 +58,18 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <TextField fx:id="accountNumberTF" layoutX="269.0" layoutY="81.0" promptText="Account Number" />
-                  <TextField fx:id="amoutTF" layoutX="269.0" layoutY="157.0" promptText="Amount" />
-                  <Button layoutX="243.0" layoutY="266.0" mnemonicParsing="false" onAction="#transferBack" text="Back" />
+                  <TextField fx:id="amountTF" layoutX="269.0" layoutY="157.0" promptText="Amount" />
+                  <Button layoutX="243.0" layoutY="266.0" mnemonicParsing="false" onAction="#transfer" text="Back" />
                   <Button layoutX="392.0" layoutY="266.0" mnemonicParsing="false" onAction="#directTransfer" text="Transfer" />
                </children>
             </AnchorPane>
         </content>
       </TitledPane>
-      <Label layoutX="606.0" layoutY="103.0" text="Account Balance" />
       <TextField fx:id="accBalTF" editable="false" layoutX="576.0" layoutY="128.0" />
+      <Label layoutX="605.0" layoutY="93.0" prefHeight="35.0" prefWidth="87.0" text="Balance">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

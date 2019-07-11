@@ -3,6 +3,7 @@ package model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.Random;
 
@@ -13,7 +14,6 @@ import java.util.Random;
 public class Database {
 
     private Connection connection;
-    private int bankID = 1337;
 
     public Database(){
         connection = null;
@@ -23,7 +23,7 @@ public class Database {
         try {
             Class.forName("org.sqlite.JDBC");
 
-            connection = DriverManager.getConnection("jdbc:sqlite:/Users/app/Desktop/Database/Bank/src/main/java/model/Bank.db");
+            connection = DriverManager.getConnection("jdbc:sqlite:C:\\Programming_Projects\\Java\\Bank\\src\\main\\java\\model\\Bank.db");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -42,6 +42,8 @@ public class Database {
     public void addAccount(String fn, String ln, String pw, String em, int pc, String st, String stN, char ge,
                         Date bd, String stat, int id) {
         try {
+            Caesar cs = new Caesar();
+
             executeSQL(
                     "INSERT INTO Account VALUES ('" + fn + "', '" +
                             ln + "', '" +
@@ -55,8 +57,10 @@ public class Database {
                             stat + "', '" +
                             id +"')"
             );
+            //Daniel
+            addLedger(generateAccountNumber(), id, Integer.parseInt(cs.encrypt(Integer.toString(generatePIN()))),
+                    0);
 
-            addLedger(generateAccountNumber(), id, generatePIN(), 0); // da Kseno mit dem Ledger
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -74,23 +78,10 @@ public class Database {
         }
     }
 
-    public void addAdministrator(int adminID, int accountID) {
-        try {
-            executeSQL(
-                    "INSERT INTO Administrator VALUES (" + accountID + ", '" +
-                            adminID + "', '" +
-                            bankID + "')"
-            );
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public void addHistory(int transferNumber, int fromUserID, int toUserID, int amount){
         try {
             executeSQL(
-                    "INSERT INTO Administrator VALUES (" + fromUserID + ", '" +
+                    "INSERT INTO History VALUES (" + fromUserID + ", '" +
                             toUserID + "', '" +
                             amount + "', '" +
                             transferNumber + "')"
@@ -115,9 +106,9 @@ public class Database {
         }
     }
 
-    public void changeBalance(int bl, int accNb) {
+    public void changeBalance(int bl, int accID) {
         try {
-            executeSQL(String.format("UPDATE Ledger SET Balance = %d WHERE AccountNumber = '%d'", bl, accNb));
+            executeSQL(String.format("UPDATE Ledger SET Balance = %d WHERE AccountID = '%d'", bl, accID));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -175,10 +166,10 @@ public class Database {
         }
     }
 
-    public User getUser(int accountNumber) {
+    public User getUser(int id) {
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Account a, Ledger l WHERE l.AccountNumber = '" + accountNumber + "'");
+            ResultSet rs = statement.executeQuery("SELECT * FROM Account WHERE ID = '" + id + "'");
             User user = null;
 
             while (rs.next()) {
@@ -193,14 +184,34 @@ public class Database {
                 char ge = tmp[0];
                 Date bd = rs.getDate("Birthdate");
                 String stat = rs.getString("Status");
-                int id = rs.getInt("ID");
-                user = new User(fn, ln, pw, em, st, ge, pc, strn, bd, stat, id);
+                int idDB = rs.getInt("ID");
+                user = new User(fn, ln, pw, em, st, ge, pc, strn, bd, stat, idDB);
             }
             return user;
 
         } catch (Exception e){
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public int getUserIDTransfer(String accountNumber) {
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM Ledger WHERE AccountNumber = '" + accountNumber + "'");
+            int accID = 0;
+
+            while (rs.next()) {
+                int balance = rs.getInt("Balance");
+                int pin = rs.getInt("PIN");
+                int accNumber = rs.getInt("AccountNumber");
+                accID = rs.getInt("AccountID");
+            }
+            return accID;
+
+        } catch (Exception e){
+            e.printStackTrace();
+            return 0;
         }
     }
 
@@ -234,9 +245,11 @@ public class Database {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(
                     "SELECT * " +
-                            "FROM Ledger AS l, Account AS a " +
-                            "WHERE a.Email = '" + email+ "'"
+                            "FROM Ledger " +
+                            "INNER JOIN Account ON Ledger.AccountID = Account.ID" +
+                            " WHERE Email = '" + email + "'"
             );
+
             Ledger ledger = null;
 
             while (rs.next()) {

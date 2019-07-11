@@ -6,10 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TitledPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import model.Database;
@@ -29,7 +26,7 @@ public class ControllerTransfer {
     private User user; //user = ControllerMainMenu.user;
 
     @FXML
-    private TextField accountNumberTF, amountTF;
+    private TextField accountNumberTF, amountTF, accBalTF;
 
     @FXML
     private AnchorPane rootPane;
@@ -52,40 +49,81 @@ public class ControllerTransfer {
     public void initialize() {
         setupTable();
         search();
+        setupBalance();
     }
 
     @FXML
-    public void directTransferButton(){
+    private void directTransferButton(){
         directTransferTitledPane.setVisible(true);
     }
 
-    @FXML
-    public void transferBack(){ directTransferTitledPane.setVisible(false);}
-
-    @FXML
-    private void directTransfer() {
+    private void setupBalance() {
         try {
             Database db = new Database();
             db.connect();
 
-            int tmp = Integer.parseInt(accountNumberTF.getText());
-            User toUser = db.getUser(tmp);
-            int fromUser = user.getId();
-            int money = Integer.parseInt(amountTF.getText());
-
-            db.addHistory(generateTransferNumber(), fromUser, toUser.getId(), money);
-
-            Ledger ledgerFROM = db.getLedger(user.getEmail());
-            db.changeBalance(ledgerFROM.getBalance() - money, fromUser);
-
-            Ledger ledgerTO = db.getLedger(toUser.getEmail());
-            db.changeBalance(ledgerTO.getBalance() + money, toUser.getId());
+            Ledger ledger = db.getLedger(user.getEmail());
+            System.out.println(user.getEmail() + ledger.getAccountNumber() + ledger.getBalance());
+            int balance = db.getLedger(user.getEmail()).getBalance();
+            accBalTF.setText(Integer.toString(balance));
 
             db.closeConnection();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+    }
+
+    @FXML
+    private void directTransfer() {
+        try {
+            Database db = new Database();
+            db.connect();
+            
+            String accountNumber = accountNumberTF.getText();
+            int amount = Integer.parseInt(amountTF.getText());
+
+            if (amount < 0) {
+                failed();
+                return;
+            }
+            
+            int fromUserID = user.getId();
+            int toUserID = db.getUserIDTransfer(accountNumber);
+            User toUser = db.getUser(toUserID);
+
+            Ledger ledgerFrom = db.getLedger(user.getEmail());
+            db.changeBalance(ledgerFrom.getBalance() - amount, fromUserID);
+
+            Ledger ledgerTo = db.getLedger(toUser.getEmail());
+            db.changeBalance(ledgerTo.getBalance() + amount, toUserID);
+
+            db.addHistory(generateTransferNumber(), fromUserID, toUserID, amount);
+
+            db.closeConnection();
+
+            transfered();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void transfered() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Direct Transfer");
+        alert.setHeaderText("Transfered Money");
+        alert.setContentText("Money was transferred to the user successfully");
+        alert.showAndWait();
+    }
+
+    private void failed() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Direct Transfer");
+        alert.setHeaderText("Failed Transfer");
+        alert.setContentText("Please check your inputs");
+        alert.showAndWait();
     }
 
     public int generateTransferNumber() {
