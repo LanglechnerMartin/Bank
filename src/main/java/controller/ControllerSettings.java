@@ -212,6 +212,7 @@ public class ControllerSettings {
     @FXML
     public void submit() {
         try {
+            Caesar cs = new Caesar();
             db.connect();
 
             Date date = new Date(Integer.parseInt(addUserBD.getText()));
@@ -228,7 +229,6 @@ public class ControllerSettings {
         catch(Exception e){
             e.printStackTrace();
         }
-
     }
 
     @FXML
