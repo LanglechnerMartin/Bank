@@ -23,7 +23,7 @@ public class Database {
         try {
             Class.forName("org.sqlite.JDBC");
 
-            connection = DriverManager.getConnection("jdbc:sqlite:F:\\MULL3\\src\\main\\java\\model\\Bank.db");
+            connection = DriverManager.getConnection("jdbc:sqlite:/Users/app/Desktop/Database/Bank/src/main/java/model/Bank.db");
 
         } catch (Exception e) {
             e.printStackTrace();

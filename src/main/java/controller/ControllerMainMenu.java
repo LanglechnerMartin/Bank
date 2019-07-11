@@ -48,13 +48,15 @@ public class ControllerMainMenu {
     public void loginCheck() {
 
         try {
+            cs = new Caesar();
+
             emailLogin = emailTextArea.getText();
             passwordLogin = loginPasswordField.getText();
 
             Database db = new Database();
             db.connect();
             user = db.getUser(emailLogin);
-            String passwordDatabase = cs.encrypt(user.getPassword());
+            String passwordDatabase = user.getPassword();
             db.closeConnection();
 
             if(passwordLogin.equals(cs.decrypt(passwordDatabase))){

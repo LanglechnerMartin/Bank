@@ -193,6 +193,7 @@ public class ControllerSettings {
             db.connect();
             db.deleteUser(deleteEmail.getText());
             db.closeConnection();
+            deletedUser();
 
 
         } catch (Exception e) {
