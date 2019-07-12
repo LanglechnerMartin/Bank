@@ -19,12 +19,6 @@ public class Caesar {
         setSwitchIt(switchIt);
     }
 
-    public static void main(String[] args) {
-        Caesar c = new Caesar();
-        String tmp = c.decrypt("Lqirupdwln534<");
-        System.out.println(tmp);
-    }
-
     public int getSwitchIt() {
         return this.switchIt;
     }
