@@ -1,3 +1,6 @@
+/**
+ * @author Julian, Martin
+ */
 package controller;
 
 import javafx.fxml.FXML;
@@ -43,7 +46,8 @@ public class ControllerMainMenu {
 
     @FXML
     public void initialize() { }
-//Caesar encrypt + decrypt
+
+    //Julian
     @FXML
     public void loginCheck() {
 
@@ -72,6 +76,7 @@ public class ControllerMainMenu {
 
     }
 
+    //Martin
     private void showDialog() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Bank-Login");
@@ -80,6 +85,7 @@ public class ControllerMainMenu {
         alert.showAndWait();
     }
 
+    //Martin
     @FXML
     private void login(){
         try {

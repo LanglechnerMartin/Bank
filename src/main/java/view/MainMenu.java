@@ -1,3 +1,6 @@
+/**
+ * @author Julian
+ */
 package view;
 
 import javafx.application.Application;

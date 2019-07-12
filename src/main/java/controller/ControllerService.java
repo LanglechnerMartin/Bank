@@ -1,3 +1,6 @@
+/**
+ * @author Martin
+ */
 package controller;
 
 import javafx.fxml.FXML;
@@ -25,10 +28,6 @@ public class ControllerService {
 
     @FXML
     public void initialize() { }
-
-    /*
-    AB HIER ALLES VON MARTIN
-     */
 
     @FXML
     public void logout(){

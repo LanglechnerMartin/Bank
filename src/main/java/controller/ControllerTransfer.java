@@ -1,3 +1,6 @@
+/**
+ * @author Julian, Martin
+ */
 package controller;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -5,7 +8,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
@@ -52,11 +54,13 @@ public class ControllerTransfer {
         setupBalance();
     }
 
+    //Martin
     @FXML
     private void directTransferButton(){
         directTransferTitledPane.setVisible(true);
     }
 
+    //Julian
     private void setupBalance() {
         try {
             Database db = new Database();
@@ -75,6 +79,7 @@ public class ControllerTransfer {
 
     }
 
+    //Julian
     @FXML
     private void directTransfer() {
         try {
@@ -110,6 +115,7 @@ public class ControllerTransfer {
         }
     }
 
+    //Martin + Julian
     private void transfered() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Direct Transfer");
@@ -118,6 +124,7 @@ public class ControllerTransfer {
         alert.showAndWait();
     }
 
+    //Martin + Julian
     private void failed() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Direct Transfer");
@@ -126,12 +133,13 @@ public class ControllerTransfer {
         alert.showAndWait();
     }
 
-    public int generateTransferNumber() {
+    //Julian
+    private int generateTransferNumber() {
         Random random = new Random();
-        int tmp = random.nextInt(999999);
-        return tmp;
+        return random.nextInt(999999);
     }
 
+    //Julian
     private void setupTable(){
 
         try {
@@ -146,6 +154,7 @@ public class ControllerTransfer {
             Statement stat = db.getConnection().createStatement();
             ResultSet rs = stat.executeQuery(SQL);
 
+            //Wieder Stackoverflow
             for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
                 final int j = i;
                 TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
@@ -154,6 +163,7 @@ public class ControllerTransfer {
                         return new SimpleStringProperty(param.getValue().get(j).toString());
                     }
                 });
+                //Bis hierhin
                 tableView.getColumns().addAll(col);
             }
             db.closeConnection();
@@ -164,6 +174,7 @@ public class ControllerTransfer {
         }
     }
 
+    //Julian
     @FXML
     private void search() {
         try {

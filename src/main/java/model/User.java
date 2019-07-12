@@ -1,11 +1,9 @@
+/**
+ * @author Daniel
+ */
 package model;
 
 import java.sql.Date;
-import java.util.Random;
-
-/*
- GESAMTE DATENBANK VON >JULIAN<
- */
 
 public class User extends Account{
 

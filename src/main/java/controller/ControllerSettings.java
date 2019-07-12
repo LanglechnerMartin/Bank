@@ -1,3 +1,6 @@
+/**
+ * @author Julian, Martin
+ */
 package controller;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -52,6 +55,7 @@ public class ControllerSettings {
 
     public ControllerSettings() { }
 
+    //Julian
     @FXML
     public void initialize() {
         try {
@@ -69,7 +73,7 @@ public class ControllerSettings {
         }
     }
 
-    //Caeser
+    //Julian
     @FXML
     private void changePassword() {
         try {
@@ -100,17 +104,20 @@ public class ControllerSettings {
         }
     }
 
+    //Martin
     @FXML
     private void deleteUser() {
         deleteUserTitledPane.setVisible(true);
         setupTable();
     }
 
+    //Martin
     @FXML
     private void addUser() {
         addUserTitledPane.setVisible(true);
     }
 
+    //Julian
     private void showDialog() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Bank-Login");
@@ -119,8 +126,8 @@ public class ControllerSettings {
         alert.showAndWait();
     }
 
+    //Julian
     private void setupTable(){
-
         try {
             db.connect();
 
@@ -129,6 +136,7 @@ public class ControllerSettings {
             Statement stat = db.getConnection().createStatement();
             ResultSet rs = stat.executeQuery(SQL);
 
+            //Stackoverflow (habs trotzdem verstanden, was passiert ;D )
             for(int i=0 ; i<rs.getMetaData().getColumnCount(); i++){
                 final int j = i;
                 TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i+1));
@@ -137,6 +145,8 @@ public class ControllerSettings {
                         return new SimpleStringProperty(param.getValue().get(j).toString());
                     }
                 });
+                //Ende Stackoverflow
+
                 tableView.getColumns().addAll(col);
             }
             db.closeConnection();
@@ -147,6 +157,7 @@ public class ControllerSettings {
         }
     }
 
+    //Julian
     @FXML
     private void search(){
         String id = idField.getText();
@@ -185,6 +196,7 @@ public class ControllerSettings {
 
     }
 
+    //Julian
     @FXML
     public void delete() {
         try {
@@ -199,6 +211,7 @@ public class ControllerSettings {
         }
     }
 
+    //Julian + Martin
     private void deletedUser() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Bank-Login");
@@ -208,6 +221,7 @@ public class ControllerSettings {
     }
 
 
+    //Julian
     @FXML
     public void submit() {
         try {
@@ -286,6 +300,7 @@ public class ControllerSettings {
     public void settings(){
         try {
             User user = ControllerMainMenu.user;
+            //Außer jede if Abfrage in settings() ;D #bugfixing...
             if (user.getStatus().equals("Admin")) {
                 AnchorPane pane = FXMLLoader.load(getClass().getClassLoader().getResource("SettingsAdmin.fxml"));
                 rootPane.getChildren().setAll(pane);

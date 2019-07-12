@@ -1,3 +1,6 @@
+/**
+ * @author Julian
+ */
 package model;
 
 public class Ledger {

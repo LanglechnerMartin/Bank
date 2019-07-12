@@ -1,5 +1,5 @@
 /**
- * @author Julian Graßl
+ * @author Julian
  */
 package model;
 
@@ -10,10 +10,6 @@ import javax.swing.*;
 import java.sql.*;
 import java.util.Random;
 
-/*
- GESAMTE DATENBANK VON >JULIAN<
- */
-
 public class Database {
 
     private Connection connection;
@@ -23,7 +19,7 @@ public class Database {
     }
 
     /**
-     * connect to Database, always use before and other method from Database class
+     * connect to Database, always use before you use another method from Database class
      */
     public void connect() {
         try {
@@ -37,7 +33,7 @@ public class Database {
     }
 
     /**
-     * disconnect from Database, always use when u finished working with the Database class
+     * disconnect from Database, always use when you finished working with the Database class
      */
     public void closeConnection() {
         try {
@@ -59,7 +55,7 @@ public class Database {
      * @param st street
      * @param stN street number
      * @param ge gender
-     * @param bd birthdate
+     * @param bd birthday
      * @param stat status
      * @param id id of the account
      */
@@ -93,10 +89,10 @@ public class Database {
     }
 
     /**
-     * changes password of account
+     * changes password of this user
      *
-     * @param email
-     * @param newPw
+     * @param email email of the using user
+     * @param newPw new password of the user
      */
     public void changePassword(String email, String newPw) {
         try {
@@ -109,6 +105,14 @@ public class Database {
         }
     }
 
+    /**
+     * adds a transfer to the History table in the Database
+     *
+     * @param transferNumber random generated number
+     * @param fromUserID Account id, who transfers his money
+     * @param toUserID Account id, who gets the money
+     * @param amount how much money is transferred
+     */
     public void addHistory(int transferNumber, int fromUserID, int toUserID, int amount){
         try {
             executeSQL(
@@ -123,6 +127,14 @@ public class Database {
         }
     }
 
+    /**
+     * adds a Ledger to the Database
+     *
+     * @param accountNumber use method generateAccountNumber() to generate one
+     * @param userID id of the user, who owns the ledger
+     * @param pin use Method generatePIN() to generate one
+     * @param balance the amount of money from the beginning
+     */
     public void addLedger(String accountNumber, int userID, int pin, int balance) {
         try {
             executeSQL(
@@ -137,6 +149,12 @@ public class Database {
         }
     }
 
+    /**
+     * changes the balance of an ledger
+     *
+     * @param bl use form "old balance - transferred money"
+     * @param accID Account id of the account owning the ledger
+     */
     public void changeBalance(int bl, int accID) {
         try {
             executeSQL(String.format("UPDATE Ledger SET Balance = %d WHERE AccountID = '%d'", bl, accID));
@@ -146,6 +164,11 @@ public class Database {
         }
     }
 
+    /**
+     * deleting user from Database, based on the email
+     *
+     * @param email Email of the account, which you want to delete
+     */
     public void deleteUser(String email) {
         try {
             executeSQL("DELETE FROM Account WHERE Email = '" + email + "'");
@@ -155,6 +178,11 @@ public class Database {
         }
     }
 
+    /**
+     * automatically generates an account number
+     *
+     * @return standard account number in germany
+     */
     public String generateAccountNumber() {
         Random random = new Random();
         String tmp3 = "00000000";
@@ -163,11 +191,20 @@ public class Database {
         return String.format("DE02%d%s%d", tmp2, tmp3, tmp4);
     }
 
+    /**
+     * automatically generates pin
+     *
+     * @return a random pin with 4 digits
+     */
     public int generatePIN() {
         Random random = new Random();
         return random.nextInt(9999);
     }
 
+    /**
+     * @param email email of the account you want to get from the Database
+     * @return User object with every data saved in the Account table of the database, based on the email
+     */
     public User getUser(String email) {
         try {
             Statement statement = connection.createStatement();
@@ -197,6 +234,10 @@ public class Database {
         }
     }
 
+    /**
+     * @param id id of the account you want to get from the database
+     * @return User object with every data saved in the Account table of the database, based on the id
+     */
     public User getUser(int id) {
         try {
             Statement statement = connection.createStatement();
@@ -226,6 +267,10 @@ public class Database {
         }
     }
 
+    /**
+     * @param accountNumber account number of the ledger, of which you want to know the owner
+     * @return id of the user owning this ledger, based on account number
+     */
     public int getUserIDTransfer(String accountNumber) {
         try {
             Statement statement = connection.createStatement();
@@ -246,6 +291,12 @@ public class Database {
         }
     }
 
+    /**
+     * Just in use to generate the TableView
+     *
+     * @param whereSearch SQL query
+     * @return ObservableList with data used to generate columns of the TableView
+     */
     public ObservableList<String> getAccount(String whereSearch) {
         try {
             Statement stat = connection.createStatement();
@@ -271,6 +322,10 @@ public class Database {
         return null;
     }
 
+    /**
+     * @param email email of the user owning the ledger
+     * @return Ledger object with every data saved in the Ledger table of the database, based on the email
+     */
     public Ledger getLedger(String email) {
         try {
             Statement statement = connection.createStatement();
@@ -298,6 +353,12 @@ public class Database {
         }
     }
 
+    /**
+     * Just in use to generate the TableView
+     *
+     * @param whereSearch SQL query
+     * @return ObservableList with data used to generate columns of the TableView
+     */
     public ObservableList<String> getHistory(String whereSearch) {
         try {
             Statement stat = connection.createStatement();
@@ -323,21 +384,6 @@ public class Database {
         return null;
     }
 
-    /*
-    public static void main(String[] args) {
-        Database db = new Database();
-        db.connect();
-        db.addAccount("Julian", "Graßl", "Passwörter werden überbewertet",
-                "julian.grassl@wdgpocking.de", 94148, "Bgm-Osterholzer Straße", 7,
-                'm', Date.valueOf("2002-06-16"), "Admin", 1);
-        System.out.println(db.getUser("julian.grassl@wdgpocking.de").getFirstName());
-        db.addLedger(db.generateAccountNumber(), db.getUser("julian.grassl@wdgpocking.de").getId(), db.generatePIN(), 0);
-        String accNb = db.getLedger("julian.grassl@wdgpocking.de").getAccountNumber();
-        db.changeBalance(1337, accNb);
-        db.closeConnection();
-    }
-    */
-
     private void executeSQL(String sqlBefehl) {
         try {
             Statement statement = connection.createStatement();
@@ -348,38 +394,9 @@ public class Database {
         }
     }
 
-    /*
-    public static void main(String[] args) {
-        Database db = new Database();
-        db.connect();
-        db.test();
-        db.closeConnection();
-    }
-
-    public void test() {
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(
-                    "SELECT * FROM History"
-            );
-
-            while (rs.next()) {
-                int i = rs.getInt("FromUser");
-                int a = rs.getInt("ToUser");
-                int b = rs.getInt("Amount");
-                int t = rs.getInt("TransferNumber");
-
-                String g = String.format("%d %d %d %d", i, a, b, t);
-                System.out.println(g);
-            }
-
-
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
+    /**
+     * @return connection of the database
      */
-
     public Connection getConnection() {
         return connection;
     }

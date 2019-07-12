@@ -1,8 +1,7 @@
-package model;
-
-/*
- GESAMTE DATENBANK VON >JULIAN<
+/**
+ * @author Daniel (Sowie alles, bei dem Caesar vorkommt)
  */
+package model;
 
 public class Caesar {
 
@@ -27,6 +26,10 @@ public class Caesar {
         this.switchIt = switchIt;
     }
 
+    /**
+     * @param text String to decrypt
+     * @return decrypted String
+     */
     public String decrypt(String text) {
 
         setSwitchIt(getSwitchIt() * -1);
@@ -35,6 +38,10 @@ public class Caesar {
         return text;
     }
 
+    /**
+     * @param text String to encrypt
+     * @return encrypted String
+     */
     public String encrypt(String text) {
 
         StringBuffer encrypted = new StringBuffer();
@@ -55,21 +62,28 @@ public class Caesar {
         return encrypted.toString();
     }
 
-    public char[] createArray() {
+    /**
+    private char[] createArray() {
 
         char[] ch = new char[26 + 26 + 10 + 33 + 6];
         int pos = 0;
         for (int i = 32; i < 127; i++) {
             ch[pos++] = (char)i;
         }
-        ch[pos++] = 'ä';
-        ch[pos++] = 'ö';
-        ch[pos++] = 'ü';
-        ch[pos++] = 'Ä';
-        ch[pos++] = 'Ö';
-        ch[pos++] = 'Ü';
+        ch[pos] = 'ä';
+        pos++;
+        ch[pos] = 'ö';
+        pos++;
+        ch[pos] = 'ü';
+        pos++;
+        ch[pos] = 'Ä';
+        pos++;
+        ch[pos] = 'Ö';
+        pos++;
+        ch[pos] = 'Ü';
         return ch;
     }
+     */
 
     public char[] getChArray() {
         return this.chArray;

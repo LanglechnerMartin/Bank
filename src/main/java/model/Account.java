@@ -1,10 +1,9 @@
+/**
+ * @author Daniel, Julian
+ */
 package model;
 
 import java.sql.Date;
-
-/*
- GESAMTE DATENBANK VON >JULIAN<
- */
 
 public abstract class Account {
 
