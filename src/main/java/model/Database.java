@@ -1,3 +1,6 @@
+/**
+ * @author Julian Graßl
+ */
 package model;
 
 import javafx.collections.FXCollections;
@@ -19,6 +22,9 @@ public class Database {
         connection = null;
     }
 
+    /**
+     * connect to Database, always use before and other method from Database class
+     */
     public void connect() {
         try {
             Class.forName("org.sqlite.JDBC");
@@ -30,6 +36,9 @@ public class Database {
         }
     }
 
+    /**
+     * disconnect from Database, always use when u finished working with the Database class
+     */
     public void closeConnection() {
         try {
             connection.close();
@@ -39,6 +48,21 @@ public class Database {
         }
     }
 
+    /**
+     * adds an account to the Database and generates a ledger automatically
+     *
+     * @param fn first name
+     * @param ln last name
+     * @param pw password
+     * @param em email
+     * @param pc postal code
+     * @param st street
+     * @param stN street number
+     * @param ge gender
+     * @param bd birthdate
+     * @param stat status
+     * @param id id of the account
+     */
     public void addAccount(String fn, String ln, String pw, String em, int pc, String st, String stN, char ge,
                         Date bd, String stat, int id) {
         try {
@@ -57,6 +81,7 @@ public class Database {
                             stat + "', '" +
                             id +"')"
             );
+
             //Daniel
             addLedger(generateAccountNumber(), id, Integer.parseInt(cs.encrypt(Integer.toString(generatePIN()))),
                     0);
@@ -67,6 +92,12 @@ public class Database {
 
     }
 
+    /**
+     * changes password of account
+     *
+     * @param email
+     * @param newPw
+     */
     public void changePassword(String email, String newPw) {
         try {
             executeSQL(

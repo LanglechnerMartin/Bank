@@ -24,8 +24,6 @@ public class ControllerSettings {
 
     private User user;
     private Database db;
-    private String email;
-    private Caesar cs;
 
     @FXML
     private AnchorPane rootPane;
@@ -89,7 +87,7 @@ public class ControllerSettings {
                 } else {
                     db.connect();
                     if (newPasswordTextField.getText().equals(passwordAgainTextField.getText())){
-                        db.changePassword(email, cs.encrypt(newPasswordTextField.getText()));
+                        db.changePassword(user.getEmail(), cs.encrypt(newPasswordTextField.getText()));
                     }
                     db.closeConnection();
 
