@@ -53,7 +53,7 @@
          <font>
             <Font size="14.0" />
          </font></Button>
-      <ImageView fitHeight="337.0" fitWidth="353.0" layoutX="263.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="337.0" fitWidth="353.0" layoutX="232.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@WDGLogo.jpg" />
          </image></ImageView>
