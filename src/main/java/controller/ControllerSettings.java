@@ -207,6 +207,7 @@ public class ControllerSettings {
         alert.showAndWait();
     }
 
+
     @FXML
     public void submit() {
         try {
@@ -228,6 +229,10 @@ public class ControllerSettings {
             e.printStackTrace();
         }
     }
+
+    /*
+    AB HIER ALLES VON MARTIN
+     */
 
     @FXML
     public void logout(){

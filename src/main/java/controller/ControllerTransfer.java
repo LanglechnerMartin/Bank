@@ -184,6 +184,10 @@ public class ControllerTransfer {
         }
     }
 
+    /*
+    AB HIER ALLES VON MARTIN
+     */
+
     @FXML
     public void logout(){
         try {

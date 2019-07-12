@@ -26,6 +26,10 @@ public class ControllerService {
     @FXML
     public void initialize() { }
 
+    /*
+    AB HIER ALLES VON MARTIN
+     */
+
     @FXML
     public void logout(){
         try {
