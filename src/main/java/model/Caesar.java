@@ -62,7 +62,6 @@ public class Caesar {
         return encrypted.toString();
     }
 
-    /**
     private char[] createArray() {
 
         char[] ch = new char[26 + 26 + 10 + 33 + 6];
@@ -83,7 +82,6 @@ public class Caesar {
         ch[pos] = 'Ü';
         return ch;
     }
-     */
 
     public char[] getChArray() {
         return this.chArray;
