@@ -115,13 +115,14 @@ public class Database {
      * @param toUserID Account id, who gets the money
      * @param amount how much money is transferred
      */
-    public void addHistory(int transferNumber, int fromUserID, int toUserID, int amount){
+    public void addHistory(int transferNumber, int fromUserID, int toUserID, int amount, Timestamp transferDate){
         try {
             executeSQL(
                     "INSERT INTO History VALUES (" + fromUserID + ", '" +
                             toUserID + "', '" +
                             amount + "', '" +
-                            transferNumber + "')"
+                            transferNumber + "', '" +
+                            transferDate + "')"
             );
 
         } catch (Exception e) {
@@ -277,7 +278,8 @@ public class Database {
                 String strn = rs.getString("StreetNumber");
                 char[] tmp = rs.getString("Gender").toCharArray();
                 char ge = tmp[0];
-                Date bd = rs.getDate("Birthdate");
+                java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString("Birthdate"));
+                Date bd = new Date((date.getTime()));
                 String stat = rs.getString("Status");
                 int idDB = rs.getInt("ID");
                 user = new User(fn, ln, pw, em, st, ge, pc, strn, bd, stat, idDB);

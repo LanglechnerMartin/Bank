@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -86,8 +88,9 @@ public class ControllerTransfer {
             
             String accountNumber = accountNumberTF.getText();
             int amount = Integer.parseInt(amountTF.getText());
+            Ledger ledgerFrom = db.getLedger(user.getEmail());
 
-            if (amount < 0) {
+            if (amount <= 0 || amount > ledgerFrom.getBalance()) {
                 failed();
                 return;
             }
@@ -96,17 +99,25 @@ public class ControllerTransfer {
             int toUserID = db.getUserIDTransfer(accountNumber);
             User toUser = db.getUser(toUserID);
 
-            Ledger ledgerFrom = db.getLedger(user.getEmail());
             db.changeBalance(ledgerFrom.getBalance() - amount, fromUserID);
 
             Ledger ledgerTo = db.getLedger(toUser.getEmail());
             db.changeBalance(ledgerTo.getBalance() + amount, toUserID);
 
-            db.addHistory(generateTransferNumber(), fromUserID, toUserID, amount);
+            Timestamp ts = new Timestamp(new java.util.Date().getTime());
+            String s = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(ts);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            java.util.Date parsedDate = dateFormat.parse(s);
+            Timestamp date = new Timestamp(parsedDate.getTime());
+
+            db.addHistory(generateTransferNumber(), fromUserID, toUserID, amount, date);
 
             db.closeConnection();
 
-            transfered();
+            accountNumberTF.setText("");
+            amountTF.setText("");
+
+            transferred();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -114,7 +125,7 @@ public class ControllerTransfer {
     }
 
     //Martin + Julian
-    private void transfered() {
+    private void transferred() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Direct Transfer");
         alert.setHeaderText("Transfered Money");
