@@ -55,6 +55,12 @@
             </font></Button>
       <Button layoutX="98.0" layoutY="120.0" mnemonicParsing="false" onAction="#directTransferButton" prefHeight="40.0" prefWidth="124.0" text="Direct transfer" />
       <TableView fx:id="tableView" layoutX="87.0" layoutY="204.0" prefHeight="376.0" prefWidth="660.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0" />
+      <TextField fx:id="accBalTF" editable="false" layoutX="576.0" layoutY="128.0" />
+      <Label layoutX="605.0" layoutY="93.0" prefHeight="35.0" prefWidth="87.0" text="Balance">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
       <TitledPane fx:id="directTransferTitledPane" animated="false" layoutX="37.0" layoutY="46.0" prefHeight="513.0" prefWidth="726.0" text="Direct Transfer" visible="false">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -67,11 +73,5 @@
             </AnchorPane>
         </content>
       </TitledPane>
-      <TextField fx:id="accBalTF" editable="false" layoutX="576.0" layoutY="128.0" />
-      <Label layoutX="605.0" layoutY="93.0" prefHeight="35.0" prefWidth="87.0" text="Balance">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
     </children>
 </AnchorPane>

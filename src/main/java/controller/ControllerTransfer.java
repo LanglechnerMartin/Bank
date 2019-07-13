@@ -114,9 +114,6 @@ public class ControllerTransfer {
 
             db.closeConnection();
 
-            accountNumberTF.setText("");
-            amountTF.setText("");
-
             transferred();
 
         } catch (Exception e) {
@@ -130,6 +127,8 @@ public class ControllerTransfer {
         alert.setTitle("Direct Transfer");
         alert.setHeaderText("Transfered Money");
         alert.setContentText("Money was transferred to the user successfully");
+        accountNumberTF.setText("");
+        amountTF.setText("");
         alert.showAndWait();
     }
 
@@ -139,6 +138,8 @@ public class ControllerTransfer {
         alert.setTitle("Direct Transfer");
         alert.setHeaderText("Failed Transfer");
         alert.setContentText("Please check your inputs");
+        accountNumberTF.setText("");
+        amountTF.setText("");
         alert.showAndWait();
     }
 
