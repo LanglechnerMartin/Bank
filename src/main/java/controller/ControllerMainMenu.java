@@ -12,9 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import model.Caesar;
 import model.Database;
 import model.User;
-import view.MainMenu;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 

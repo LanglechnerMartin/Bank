@@ -3,12 +3,15 @@
  */
 package model;
 
+import controller.ControllerMainMenu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import javax.swing.*;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Database {
 
@@ -25,7 +28,7 @@ public class Database {
         try {
             Class.forName("org.sqlite.JDBC");
 
-            connection = DriverManager.getConnection("jdbc:sqlite:D:\\dokumente\\1_Schule\\11_2\\InformatikBankproject\\Bank\\src\\main\\java\\model\\Bank.db");
+            connection = DriverManager.getConnection("jdbc:sqlite:C:\\Programming_Projects\\Java\\Bank\\src\\main\\java\\model\\Bank.db");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -72,15 +75,14 @@ public class Database {
                             pc + ", '" +
                             st + "', '" +
                             stN + "', '" +
-                            ge + "', " +
-                            bd + ", '" +
+                            ge + "', '" +
+                            bd + "', '" +
                             stat + "', '" +
                             id +"')"
             );
 
             //Daniel
-            addLedger(generateAccountNumber(), id, Integer.parseInt(cs.encrypt(Integer.toString(generatePIN()))),
-                    0);
+            addLedger(generateAccountNumber(), id, generatePIN(), 0);
 
         } catch (Exception e){
             e.printStackTrace();
@@ -166,12 +168,30 @@ public class Database {
 
     /**
      * deleting user from Database, based on the email
+     * automatically deletes the ledger of the deleted user
      *
      * @param email Email of the account, which you want to delete
      */
     public void deleteUser(String email) {
         try {
             executeSQL("DELETE FROM Account WHERE Email = '" + email + "'");
+            User user = ControllerMainMenu.user;
+            deleteLedger(user.getId());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * deleting ledger from Database, based on the account id
+     * automatically deleting ledger, when deleting his owner
+     *
+     * @param accID account id of the owner
+     */
+    public void deleteLedger(int accID){
+        try {
+            executeSQL("DELETE FROM Ledger WHERE AccountID = '" + accID + "'");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -183,7 +203,7 @@ public class Database {
      *
      * @return standard account number in germany
      */
-    public String generateAccountNumber() {
+    private String generateAccountNumber() {
         Random random = new Random();
         String tmp3 = "00000000";
         int tmp2 = random.nextInt(99);
@@ -196,9 +216,11 @@ public class Database {
      *
      * @return a random pin with 4 digits
      */
-    public int generatePIN() {
-        Random random = new Random();
-        return random.nextInt(9999);
+    private int generatePIN() {
+        Random r = new Random();
+        int low = 1000;
+        int high = 10000;
+        return r.nextInt(high-low) + low;
     }
 
     /**
@@ -221,7 +243,8 @@ public class Database {
                 String strn = rs.getString("StreetNumber");
                 char[] tmp = rs.getString("Gender").toCharArray();
                 char ge = tmp[0];
-                Date bd = rs.getDate("Birthdate");
+                java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(rs.getString("Birthdate"));
+                Date bd = new Date((date.getTime()));
                 String stat = rs.getString("Status");
                 int id = rs.getInt("ID");
                 user = new User(fn, ln, pw, em, st, ge, pc, strn, bd, stat, id);

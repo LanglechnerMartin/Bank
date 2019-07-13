@@ -66,8 +66,6 @@ public class ControllerTransfer {
             Database db = new Database();
             db.connect();
 
-            Ledger ledger = db.getLedger(user.getEmail());
-            System.out.println(user.getEmail() + ledger.getAccountNumber() + ledger.getBalance());
             int balance = db.getLedger(user.getEmail()).getBalance();
             accBalTF.setText(Integer.toString(balance));
 

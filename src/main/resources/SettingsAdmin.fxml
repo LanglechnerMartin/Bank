@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
@@ -93,19 +94,19 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="286.0" prefWidth="534.0">
                <children>
-                  <Button layoutX="332.0" layoutY="309.0" mnemonicParsing="false" onAction="#submit" prefHeight="34.0" prefWidth="87.0" text="Submit" />
-                  <TextField fx:id="addUserFN" layoutX="62.0" layoutY="85.0" prefHeight="25.0" prefWidth="149.0" promptText="First Name" />
                   <Button layoutX="93.0" layoutY="309.0" mnemonicParsing="false" onAction="#settings" prefHeight="34.0" prefWidth="87.0" text="Back" />
+                  <TextField fx:id="addUserFN" layoutX="62.0" layoutY="85.0" prefHeight="25.0" prefWidth="149.0" promptText="First Name" />
                   <TextField fx:id="addUserLN" layoutX="62.0" layoutY="128.0" prefHeight="25.0" prefWidth="149.0" promptText="Last Name" />
                   <TextField fx:id="addUserPW" layoutX="62.0" layoutY="172.0" prefHeight="25.0" prefWidth="149.0" promptText="Password" />
                   <TextField fx:id="addUserEmail" layoutX="62.0" layoutY="214.0" prefHeight="25.0" prefWidth="149.0" promptText="E-Mail" AnchorPane.topAnchor="200.0" />
+                  <DatePicker fx:id="addUserBD" layoutX="62.0" layoutY="253.0" prefHeight="20.0" prefWidth="149.0" promptText="Date of Birth" />
                   <TextField fx:id="addUserPC" layoutX="301.0" layoutY="42.0" prefHeight="25.0" prefWidth="149.0" promptText="Postal Code" />
                   <TextField fx:id="addUserStreet" layoutX="301.0" layoutY="85.0" prefHeight="25.0" prefWidth="149.0" promptText="Street" />
                   <TextField fx:id="addUserSN" layoutX="301.0" layoutY="128.0" prefHeight="25.0" prefWidth="149.0" promptText="Street Number" />
                   <TextField fx:id="addUserGender" layoutX="301.0" layoutY="172.0" prefHeight="25.0" prefWidth="149.0" promptText="Gender" />
-                  <TextField fx:id="addUserBD" layoutX="62.0" layoutY="253.0" prefHeight="25.0" prefWidth="149.0" promptText="Year of Birth" />
                   <TextField fx:id="addUserStatus" layoutX="301.0" layoutY="214.0" prefHeight="25.0" prefWidth="149.0" promptText="Status" />
                   <TextField fx:id="addUserID" layoutX="301.0" layoutY="253.0" prefHeight="25.0" prefWidth="149.0" promptText="ID" />
+                  <Button layoutX="332.0" layoutY="309.0" mnemonicParsing="false" onAction="#submit" prefHeight="34.0" prefWidth="87.0" text="Submit" />
                   <Label layoutX="62.0" layoutY="26.0" prefHeight="31.0" prefWidth="118.0" text="Add User">
                      <font>
                         <Font size="22.0" />

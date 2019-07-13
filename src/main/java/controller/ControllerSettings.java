@@ -20,6 +20,7 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 
@@ -38,8 +39,11 @@ public class ControllerSettings {
     private TextField firstNameTextField, lastNameTextField, emailTextField,
             oldPasswordTextField, newPasswordTextField, passwordAgainTextField,
             idField, emailField, fnField, lnField, deleteEmail, addUserFN, addUserLN,
-            addUserPW, addUserEmail, addUserBD, addUserPC, addUserStreet, addUserSN,
+            addUserPW, addUserEmail, addUserPC, addUserStreet, addUserSN,
             addUserGender, addUserStatus, addUserID;
+
+    @FXML
+    private DatePicker addUserBD;
 
     @FXML
     private TextArea addressTextField;
@@ -228,7 +232,8 @@ public class ControllerSettings {
             Caesar cs = new Caesar();
             db.connect();
 
-            Date date = new Date(Integer.parseInt(addUserBD.getText()));
+            LocalDate localDate = addUserBD.getValue();
+            Date date = Date.valueOf(localDate);
 
             db.addAccount(addUserFN.getText(), addUserLN.getText(), cs.encrypt(addUserPW.getText()), addUserEmail.getText(),
                     Integer.parseInt(addUserPC.getText()), addUserStreet.getText(), addUserSN.getText(),
