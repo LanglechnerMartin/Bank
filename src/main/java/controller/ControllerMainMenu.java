@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
 import model.Caesar;
 import model.Database;
@@ -30,6 +31,9 @@ public class ControllerMainMenu {
 
     @FXML
     private TextArea emailTextArea;
+
+    @FXML
+    private TitledPane registrationPane;
 
     @FXML
     private PasswordField loginPasswordField;
@@ -93,5 +97,13 @@ public class ControllerMainMenu {
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void registration(){
+        registrationPane.setVisible(true);
+    }
+
+    public void SubmitButton(){
+
     }
 }
