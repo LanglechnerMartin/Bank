@@ -5,6 +5,7 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import model.User;
 
@@ -18,6 +19,8 @@ public class ControllerService {
     @FXML
     private AnchorPane rootPane;
 
+    private double addY = 140.0;
+
     @FXML
     private URL location;
 
@@ -28,6 +31,18 @@ public class ControllerService {
 
     @FXML
     public void initialize() { }
+
+    /**
+     * Useless
+     */
+    @FXML
+    public void newButton() {
+        Button button = new Button("Useless Button");
+        AnchorPane.setRightAnchor(button, 120.0);
+        AnchorPane.setTopAnchor(button, addY);
+        addY += 30.0;
+        rootPane.getChildren().addAll(button);
+    }
 
     @FXML
     public void logout(){

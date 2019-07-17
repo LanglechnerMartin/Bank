@@ -54,5 +54,6 @@
          <font>
             <Font size="14.0" />
          </font></Label>
+      <Button layoutX="601.0" layoutY="109.0" mnemonicParsing="false" onAction="#newButton" text="New Button" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="110.0" />
    </children>
 </AnchorPane>
